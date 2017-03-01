@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<%- include source.html %>
+</head>
+<body>
+
+  <%- include header.html %>
+  <div class="template-page-wrapper" style="min-width: 1200px;">
+    <%- include sidebar.html %>
+    <div class="templatemo-content-wrapper has-child-nav">
+      <%- include subbar.html %>
+      <div class="templatemo-content">
+        <ul class="nav nav-tabs mytabs">
+
+          <li class="active"><a href="#">对话框&轻提示</a></li>
+        </ul>
+        <div  style="padding-top:15px;">
+          <button type="button" name="button" class="btn btn-primary" id="kconfirm">Confirm</button>
+
+          <button type="button" name="button" class="btn btn-primary" id="kalert">Alert</button>
+
+          <button type="button" name="button" class="btn btn-primary" id="toast-success">Toast Success</button>
+
+          <button type="button" name="button" class="btn btn-primary" id="toast-loading">Toast Loading</button>
+
+          <button type="button" name="button" class="btn btn-primary" id="toast-error">Toast Error</button>
+        </div>
+      </div>
+
+    </div><!--#content-->
+  </div>
+
+
+
+
+  <script type="text/javascript">
+    $('#kconfirm').click(function(){
+      kconfirm('确定删除？', function(){
+        kalert('删除成功')
+      }, function(){
+        kalert('取消')
+      })
+    })
+
+    $('#kalert').click(function(){
+      kalert('Alert', function(){
+
+      })
+    })
+
+    $('#toast-success').click(function(){
+      ktoast.success('操作成功')
+    })
+
+    $('#toast-error').click(function(){
+      ktoast.error('操作失败')
+    })
+
+    $('#toast-loading').click(function(){
+      ktoast.loading('正在处理中')
+    })
+
+
+  </script>
+</body>
+</html>
