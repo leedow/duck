@@ -170,6 +170,18 @@ function Form(formObj, btnObj){
  	 	return this
  	}
 
+  this.clean = function(){
+    if(typeof this.formObj == 'string'){
+ 			var form = $(this.formObj);
+ 		} else {
+ 			var form = this.formObj;
+ 		}
+
+ 	 	form.find('input').val('');
+ 	 	form.find('textarea').val('');
+    return this
+  }
+
 
  }
 

@@ -35,30 +35,30 @@
 
 
   <script type="text/javascript">
+
+    dtoast.auto()
     $('#kconfirm').click(function(){
-      kconfirm('确定删除？', function(){
-        kalert('删除成功')
-      }, function(){
-        kalert('取消')
+      dconfirm('确定删除？').ok(function(){
+        dtoast.success('删除成功')
       })
     })
 
     $('#kalert').click(function(){
-      kalert('Alert', function(){
-
-      })
+      dalert('Alert')
     })
 
     $('#toast-success').click(function(){
-      ktoast.success('操作成功')
+      dtoast.success('操作成功').done(function(){
+        dalert('完成')
+      })
     })
 
     $('#toast-error').click(function(){
-      ktoast.error('操作失败')
+      dtoast.error('操作失败')
     })
 
     $('#toast-loading').click(function(){
-      ktoast.loading('正在处理中')
+      dtoast.loading('正在处理中')
     })
 
 

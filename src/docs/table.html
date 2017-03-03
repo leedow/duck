@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<%- include source.html %>
+</head>
+<body>
+
+  <%- include header.html %>
+  <div class="template-page-wrapper" style="min-width: 1200px;">
+    <%- include sidebar.html %>
+    <div class="templatemo-content-wrapper has-child-nav">
+      <%- include subbar.html %>
+      <div class="templatemo-content">
+        <ul class="nav nav-tabs mytabs">
+
+          <li class="active"><a href="#">表 格</a></li>
+        </ul>
+        <div>
+          <table class="table table-striped table-hover table-bordered">
+           <thead>
+             <tr>
+               <th>ID</th>
+               <th>名称</th>
+               <th>操作</th>
+             </tr>
+           </thead>
+           <tbody>
+              <tr>
+                <td>22</td>
+                <td>test</td>
+                <td>
+                <a href="http://localhost/CZTHQ/index.php/spec/edit/id/22" class=" ">编辑</a>
+                <a href="#" class="del" data-id="22">删除</a>
+                </td>
+              </tr>
+              <tr>
+                <td>21</td>
+                <td>test</td>
+                <td>
+                  <a href="http://localhost/CZTHQ/index.php/spec/edit/id/21" class=" ">编辑</a>
+                  <a href="#" class="del" data-id="21">删除</a>
+                </td>
+              </tr>
+            </tbody>
+         </table>
+        </div>
+      </div>
+
+    </div><!--#content-->
+  </div>
+
+
+
+
+
+</body>
+</html>

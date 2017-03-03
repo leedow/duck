@@ -47,16 +47,14 @@
 	var Form = __webpack_require__(1)
 	var Dialog = __webpack_require__(2)
 	var Toast = __webpack_require__(3)
-	var Rqt = __webpack_require__(5)
-	var Loc = __webpack_require__(6)
+	var Rqt = __webpack_require__(4)
+	var Loc = __webpack_require__(5)
 
 
 	window.dform = Form
 	window.dtoast = Toast
 	window.drqt = Rqt
 	window.dlocation = Loc
-	window.dalert = Dialog.dalert
-	window.dconfirm = Dialog.dconfirm
 
 
 /***/ },
@@ -264,67 +262,33 @@
 /***/ function(module, exports) {
 
 	
-	function Dialog(type){
-	  this._ok = function(){}
-	  this._no = function(){}
-	  this.type = type //or confirm
-	  var _this = this
+	window.dconfirm = function(content, ok, no){
+	  var ok = ok||function(){}
+	  var no = no||function(){}
+	  $('#confirm').modal('show')
+	  $('#confirm-content').text(content); // = content
 
+	  $('#confirm-ok').one('click', function(){
+	    ok()
+	    $('#confirm').modal('hide')
+	  })
 
-	  this.ok = function(ok){
-	    this._ok = ok
-	  }
-
-	  this.no = function(no){
-	    this._no = no
-	  }
-
-
-	  this.open = function(content){
-
-	    if(_this.type == 'alert'){
-	      $('#alert').modal('show')
-	      $('#alert-content').text(content); // = content
-
-	      $('#alert-ok').one('click', function(){
-	        $('#alert').modal('hide')
-	        _this._ok()
-	      })
-	    }
-
-	    if(_this.type == 'confirm'){
-	      $('#confirm').modal('show')
-	      $('#confirm-content').text(content); // = content
-
-	      $('#confirm-ok').one('click', function(){
-	        _this._ok()
-	        $('#confirm').modal('hide')
-	      })
-
-	      $('#confirm-no').one('click', function(){
-	        _this._no()
-	        $('#confirm').modal('hide')
-	      })
-	    }
-	  }
+	  $('#confirm-no').one('click', function(){
+	    no()
+	    $('#confirm').modal('hide')
+	  })
 	}
 
 
-	var dalert = function(content){
-	  var d = new Dialog('alert')
-	  d.open(content)
-	  return d
-	}
+	window.dalert = function(content, ok ){
+	  var ok = ok||function(){}
+	  $('#alert').modal('show')
+	  $('#alert-content').text(content); // = content
 
-	var dconfirm = function(content){
-	  var d = new Dialog('confirm')
-	  d.open(content)
-	  return d
-	}
-
-	module.exports = {
-	  dalert: dalert,
-	  dconfirm: dconfirm
+	  $('#alert-ok').one('click', function(){
+	    $('#alert').modal('hide')
+	    ok()
+	  })
 	}
 
 
@@ -332,13 +296,27 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var urly = __webpack_require__(4)
+	var urly = __webpack_require__(6)
 
-	function Toast(){
-	  var autoflag = true
-	  var _this  = this
-
-	  this.open = function(content , limit){
+	var Toast = {
+	  /**
+	   * 当浏览器带有相关GET参数时，自动弹出一条提示
+	   */
+	  auto: function(){
+	    alert('fsdf')
+	    var url = new urly(window.location.href)
+	    var toastsuccess = url.getParams().toastsuccess||false
+	    var toasterror = url.getParams().toasterror||false
+	    if(toastsuccess){
+	      this.success(toastsuccess)
+	    }
+	    if(toasterror){
+	      this.error(toasterror)
+	    }
+	  },
+	  open: function(content, done, limit){
+	    alert('open')
+	    done = done||function(){}
 	    if($('#toast').length==0 ){
 	      $('body').append('<div id="toast"></div>')
 	    }
@@ -348,82 +326,88 @@
 	    setTimeout(function(){
 	      $('#toast').animate({
 	        top: '-50px'
-	      }, 'fast', _this._done)
+	      }, 'fast', done)
 	    }, limit||2000)
-	    return this
-	  }
-
-
-	  this.success = function(content, limit){
-	    this.open('<div  class="alert alert-shadow alert-success"><i class="icon iconfont icon-roundcheckfill"></i> '+content+'</div>', limit)
-	    return this
-	  }
-
-
-	  this.error = function(content, limit){
-	    this.open('<div  class="alert alert-shadow alert-danger"><i class="icon iconfont icon-infofill"></i> '+content+'</div>', limit)
-	    return this
-	  }
-
-
-	  this.loading = function(content, limit){
-	    this.open('<div  class="alert alert-shadow alert-info">'+content+'</div>', limit)
-	    return this
-	  }
-
-
-	  this._done = function(){}
-	  this.done = function(done){
-	    _this._done = done
+	  },
+	  success: function(content, done, limit){
+	    this.open('<div  class="alert alert-shadow alert-success"><i class="icon iconfont icon-roundcheckfill"></i> '+content+'</div>', done, limit)
+	  },
+	  error: function(content, done, limit){
+	    this.open('<div  class="alert alert-shadow alert-danger"><i class="icon iconfont icon-infofill"></i> '+content+'</div>', done, limit)
+	  },
+	  loading: function(content, done, limit){
+	    this.open('<div  class="alert alert-shadow alert-info">'+content+'</div>', done, limit)
 	  }
 	}
 
-	var dtoast = {
-	  obj: false,
-	  success: function(content, limit){
-	    this.obj = new Toast()
-	    this.obj.success(content, limit)
-	    return this.obj
-	  },
-	  error: function(content, limit){
-	    this.obj = new Toast()
-	    this.obj.error(content, limit)
-	    return this.obj
-	  },
-	  loading: function(content, limit){
-	    this.obj = new Toast()
-	    this.obj.loading(content, limit)
-	    return this.obj
-	  },
-	  /**
-	   * 当浏览器带有相关GET参数时，自动弹出一条提示
-	   */
-	  auto: function(){
-	    this.obj = new Toast()
-	    var url = new urly(window.location.href)
-	    var toastsuccess = url.getParams().toastsuccess||false
-	    var toasterror = url.getParams().toasterror||false
-	    var toasttime = url.getParams().toasttime||0
-	    var currenttime = parseInt(new Date().getTime()/1000)
-	    if(currenttime - toasttime >5){
-	      return
-	    }
-	    if(toastsuccess){
-	      this.obj.success(toastsuccess)
-	      //autoflag = true
-	    }
-	    if(toasterror){
-	      this.obj.error(toasterror)
-	      //autoflag = true
-	    }
-	  }
-	}
-
-	module.exports = dtoast
+	module.exports = Toast
 
 
 /***/ },
 /* 4 */
+/***/ function(module, exports) {
+
+	/*
+	 * @param url: '/test'
+	 * @param data: JSON
+	 * @param success: function
+	 * @param error: function 可以不传
+	 */
+	var current_post = '';
+	var current_get = '';
+
+	module.exports = {
+	  before: function(data){
+	    return true
+	  },
+	  error: function(){
+
+	  },
+		post: function(url, data, success, error){
+			if(error == undefined) {var error = function(){}};
+	    this.handle(url, data, success, error, 'post')
+		},
+		get: function(url, data, success, error){
+			if(error == undefined) {var error = function(){}};
+			this.handle(url, data, success, error, 'get')
+		},
+	  handle: function(url, data, success, error,  type){
+	    var _this = this
+	    $.ajax({
+				url: url,
+				type: type,
+				data: data,
+				success: function(data){
+	        if(_this.before(data)){
+	          success(data)
+	        }
+				},
+				error: function(){
+	        if(error()){
+	          _this.error()
+	        }
+				}
+			});
+	  }
+	};
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var urly = __webpack_require__(6)
+
+	module.exports = {
+	  base: '',
+	  go: function(url, params){
+	    window.location.href = new urly(this.base + url).setParams(params).getHref()
+	  }
+	}
+
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
 	var urly = function(href){
@@ -493,7 +477,7 @@
 				var p = par[size];
 				//console.log(p)
 				p = p.split('=');
-				this.params[p[0]] = decodeURI(p[1]?p[1]:'');
+				this.params[p[0]] = p[1]?p[1]:'';
 			}
 
 			return this
@@ -509,88 +493,6 @@
 	}
 
 	module.exports = urly;
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	/*
-	 * @param url: '/test'
-	 * @param data: JSON
-	 * @param success: function
-	 * @param error: function 可以不传
-	 */
-	var current_post = '';
-	var current_get = '';
-
-	module.exports = {
-	  before: function(data){
-	    return true
-	  },
-	  error: function(){
-
-	  },
-		post: function(url, data, success, error){
-			if(error == undefined) {var error = function(){}};
-	    this.handle(url, data, success, error, 'post')
-		},
-		get: function(url, data, success, error){
-			if(error == undefined) {var error = function(){}};
-			this.handle(url, data, success, error, 'get')
-		},
-	  handle: function(url, data, success, error,  type){
-	    var _this = this
-	    $.ajax({
-				url: url,
-				type: type,
-				data: data,
-				success: function(data){
-	        if(_this.before(data)){
-	          success(data)
-	        }
-				},
-				error: function(){
-	        if(error()){
-	          _this.error()
-	        }
-				}
-			});
-	  }
-	};
-
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var urly = __webpack_require__(4)
-
-	module.exports = {
-	  base: '',
-	  /**
-	   * @param {String} prefix on||off 是否自动加上前缀
-	   */
-	  go: function(url, params, prefix){
-	    var prefix = prefix||'on'
-	    var base = ''
-	    if(prefix == 'on'){
-	      base = this.base
-	    }
-	    for(var key in params){
-	      if(key == 'toastsuccess' || key == 'toasterror'){
-	        params.toasttime = parseInt(new Date().getTime()/1000)
-	      }
-	    }
-	    window.location.href = new urly(base + url).setParams(params).getHref()
-	  },
-	  back: function(){
-	    window.history.go(-1)
-	  },
-	  fresh: function(params){
-	    this.go(window.location.href, params , 'off')
-	  }
-	}
 
 
 /***/ }

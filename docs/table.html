@@ -106,84 +106,46 @@
 
       <div class="templatemo-content">
         <ul class="nav nav-tabs mytabs">
-          <li><a href="#"><i class="icon iconfont icon-back"></i> 返回</a></li>
-          <li class="active"><a href="#">表单提交</a></li>
+
+          <li class="active"><a href="#">表 格</a></li>
         </ul>
-        <div class="row" style="padding-top:15px;">
-          <form class="form-horizontal col-md-7" id="demoform">
-            <div class="form-group">
-              <label for="inputEmail3" class="col-sm-3 control-label">非 空</label>
-              <div class="col-sm-9">
-                <input type="email" name="a" class="form-control" data-required="true"  placeholder="请输入内容">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword3" class="col-sm-3 control-label">整 数</label>
-              <div class="col-sm-9">
-                <input type="text" name="b" class="form-control" data-required="true" data-format="int"  placeholder="请输入整数">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword3" class="col-sm-3 control-label">小 数</label>
-              <div class="col-sm-9">
-                <input type="text" name="c" class="form-control" data-required="true" data-format="float"  placeholder="请输入小数">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword3" class="col-sm-3 control-label">任 意</label>
-              <div class="col-sm-9">
-                <input type="text" name="d" class="form-control"  placeholder="请输入任意内容">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword3" class="col-sm-3 control-label">下拉菜单</label>
-              <div class="col-sm-9">
-                <select class="form-control" name="e">
-                  <option value="1">Item1</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword3" class="col-sm-3 control-label">文本框</label>
-              <div class="col-sm-9">
-                <textarea name="f" class="form-control" rows="4"  ></textarea>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-offset-3 col-sm-10">
-                <button type="button" class="btn btn-primary" id="submit">保 存</button>
-              </div>
-            </div>
-          </form>
+        <div>
+          <table class="table table-striped table-hover table-bordered">
+           <thead>
+             <tr>
+               <th>ID</th>
+               <th>名称</th>
+               <th>操作</th>
+             </tr>
+           </thead>
+           <tbody>
+              <tr>
+                <td>22</td>
+                <td>test</td>
+                <td>
+                <a href="http://localhost/CZTHQ/index.php/spec/edit/id/22" class=" ">编辑</a>
+                <a href="#" class="del" data-id="22">删除</a>
+                </td>
+              </tr>
+              <tr>
+                <td>21</td>
+                <td>test</td>
+                <td>
+                  <a href="http://localhost/CZTHQ/index.php/spec/edit/id/21" class=" ">编辑</a>
+                  <a href="#" class="del" data-id="21">删除</a>
+                </td>
+              </tr>
+            </tbody>
+         </table>
         </div>
       </div>
+
     </div><!--#content-->
   </div>
-  <script type="text/javascript">
-  /**
-   * 表单提交DEMO
-   */
-  var demo = dform.create('#demoform', '#submit')
 
-  $('#submit').click(function(){
-    demo.submit(function(data){
 
-      console.log('表单数据为：')
-      console.log(data)
-      dalert('表单验证通过，数据为：'+JSON.stringify(data), function(){
-        dtoast.success('提交成功')
-      })
 
-      drqt.post('/', {}, function(data){
 
-      })
 
-      setTimeout(function(){
-        demo.reset() //解锁表单
-      }, 1000)
-
-    })
-  })
-  </script>
 </body>
 </html>
