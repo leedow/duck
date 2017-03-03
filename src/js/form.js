@@ -130,6 +130,7 @@
 
 /**
  * 表单处理
+ * @param {Object} data 如果存在，则自动填充表单
  */
 function Form(formObj, btnObj){
  	this.request = false;
@@ -182,7 +183,12 @@ function Form(formObj, btnObj){
     return this
   }
 
-
+  //根据ID填充表单
+  this.autofill = function(data){
+    for(var  key in data){
+      $(key).val(data[key])
+    }
+  }
  }
 
 

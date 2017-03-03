@@ -76,12 +76,13 @@
 
       console.log('表单数据为：')
       console.log(data)
+
       dalert('表单验证通过，数据为：'+JSON.stringify(data), function(){
         dtoast.success('提交成功')
       })
 
       drqt.post('/', {}, function(data){
-
+        
       })
 
       setTimeout(function(){

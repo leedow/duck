@@ -49,6 +49,7 @@
 	var Toast = __webpack_require__(3)
 	var Rqt = __webpack_require__(5)
 	var Loc = __webpack_require__(6)
+	var ArrayHelper = __webpack_require__(7)
 
 
 	window.dform = Form
@@ -57,6 +58,7 @@
 	window.dlocation = Loc
 	window.dalert = Dialog.dalert
 	window.dconfirm = Dialog.dconfirm
+	window.darray = ArrayHelper
 
 
 /***/ },
@@ -195,6 +197,7 @@
 
 	/**
 	 * 表单处理
+	 * @param {Object} data 如果存在，则自动填充表单
 	 */
 	function Form(formObj, btnObj){
 	 	this.request = false;
@@ -247,7 +250,12 @@
 	    return this
 	  }
 
-
+	  //根据ID填充表单
+	  this.autofill = function(data){
+	    for(var  key in data){
+	      $(key).val(data[key])
+	    }
+	  }
 	 }
 
 
@@ -321,6 +329,7 @@
 	  d.open(content)
 	  return d
 	}
+
 
 	module.exports = {
 	  dalert: dalert,
@@ -589,6 +598,29 @@
 	  },
 	  fresh: function(params){
 	    this.go(window.location.href, params , 'off')
+	  }
+	}
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  find: function(aim, key, value){
+	    var res = ''
+	    for(var i=0; i<aim.length; i++){
+
+	      try{
+	        if(aim[i][key] == value){
+	          res = aim[i][key]
+	        }
+	      }catch(e){
+	        console.log(key + '不存在')
+	      }
+
+	    }
+	    return res
 	  }
 	}
 
