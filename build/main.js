@@ -634,27 +634,13 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	ksidebar = function(){
-
-	  $('.open-sidebar-right').click(function(){
-	    var aim = $(this).data('aim')
-	    $('.sidebar-right').each(function(){
-	      $(this).css({right: -$(this).width()+'px'})
-	    })
-	    $('#'+aim).animate({right: '0px'})
-	  })
-
-	  $('.sidebar-right .close').click(function(){
-	    var sidebar = $(this).parents('.sidebar-right')
-	    sidebar.animate({right: -sidebar.width()+'px'})
-	  })
-	}
-
 	/**
 	 * @param {String} obj 选择器名
+	 * @param {Object} config{autoclose, width}
 	 */
-	function sdialog(obj, autoclose){
+	function sdialog(obj, config){
 	  this.obj = null
+	  this.config = config||{autoclose:false, width: 400}
 	  _this = this
 
 	  if(typeof obj == 'string'){
@@ -667,11 +653,14 @@
 	    _this.close()
 	  })
 
-	  if(autoclose){
+	  /*
+	  if(this.config.autoclose){
 	    $('body').click(function(){
 	      _this.close()
 	    })
-	  }
+	  }*/
+
+	  this.obj.css({width:  _this.config.width+'px', right: -_this.config.width+'px'})
 
 	  /**
 	   * 打开对话框
@@ -696,8 +685,8 @@
 	}
 
 
-	module.exports = function(obj){
-	  return new sdialog(obj)
+	module.exports = function(obj, config){
+	  return new sdialog(obj, config)
 	}
 
 

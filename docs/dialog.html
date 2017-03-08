@@ -120,7 +120,7 @@
 
 
   <!--右侧对话框-->
-  <div class="sidebar-right" id="sdialog" style="width:400px;right: -400px;">
+  <div class="sidebar-right" id="sdialog">
     <div class="sidebar-title">
       列表
       <div class="close">
@@ -142,7 +142,9 @@
 
 
   <script type="text/javascript">
-    var sdialog = sdialog('#sdialog')
+    var sdialog = sdialog('#sdialog', {
+      width: 600
+    })
     $('#open-sdialog').click(function(){
       sdialog.open()
     })
