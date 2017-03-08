@@ -151,7 +151,8 @@ function Form(formObj, btnObj){
  	if(btnObj)
  		this.setBtn(btnObj);
 
- 	this.submit = function(callback){
+ 	this.submit = function(callback, faild){
+    var error = faild||function(){}
  		if(Verify.check(this.formObj) && !this.request){
  			//提交预处理
  			this.request = true;
@@ -161,7 +162,9 @@ function Form(formObj, btnObj){
  		    //数据AJAX提交
  		    callback(data)
 
- 		}
+ 		} else {
+      error()
+    }
  		return this;
  	}
 
@@ -185,8 +188,8 @@ function Form(formObj, btnObj){
 
   //根据ID填充表单
   this.autofill = function(data){
-    for(var  key in data){
-      $(key).val(data[key])
+    for(var key in data){
+      $('[name="'+key+'"]').val(data[key])
     }
   }
  }

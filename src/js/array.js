@@ -5,7 +5,7 @@ module.exports = {
 
       try{
         if(aim[i][key] == value){
-          res = aim[i][key]
+          res = aim[i]
         }
       }catch(e){
         console.log(key + '不存在')

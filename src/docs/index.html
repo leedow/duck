@@ -35,12 +35,27 @@
                 <input type="text" name="c" class="form-control" data-required="true" data-format="float"  placeholder="请输入小数">
               </div>
             </div>
+
             <div class="form-group">
               <label for="inputPassword3" class="col-sm-3 control-label">任 意</label>
               <div class="col-sm-9">
                 <input type="text" name="d" class="form-control"  placeholder="请输入任意内容">
               </div>
             </div>
+
+
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-3 control-label">日 期</label>
+              <div class="col-sm-9">
+                <input type="text" data-dom="timepicker" id="d" name="d" class="form-control"  placeholder="">
+              </div>
+            </div>
+            <script type="text/javascript">
+            $("[data-dom='datepicker']").datetimepicker({format: 'yyyy-mm-dd', autoclose: true, minView: 2});
+            </script>
+
+
+
             <div class="form-group">
               <label for="inputPassword3" class="col-sm-3 control-label">下拉菜单</label>
               <div class="col-sm-9">
@@ -49,12 +64,46 @@
                 </select>
               </div>
             </div>
+
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-3 control-label">单图上传</label>
+              <div class="col-sm-9">
+                <input class="file-" type="file"  id="img" name="Filedata"/>
+                <input id="pic" name="pic" type="hidden" class="input" value="<?php echo $product['image']; ?>">
+                <div id="k-pic-box" style="margin-top:10px;">
+                  <img id="img_product" src="http://7xj0kd.com2.z0.glb.qiniucdn.com/<?php echo $product['image']; ?>"  height="100px;"  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" id="pics-demo">
+              <label for="inputPassword3" class="col-sm-3 control-label">多图上传</label>
+              <div class="col-sm-9">
+                <input class="file-" type="file"  id="img-recommand" name="Filedata"/>
+                <div class="pics-list">
+                  载入数据中....
+                </div>
+              </div>
+            </div>
+
+            <script type="text/html" id="piclist">
+              {{each data as item i}}
+              <div class="pic-box">
+                <img  data-id="{{item.id}}" src="http://7xj0kd.com2.z0.glb.qiniucdn.com/{{item.url}}"  height="100px;"  />
+                <div class="control" data-id="{{item.id}}">
+                  <i class="icon iconfont icon-delete"></i>
+                </div>
+              </div>
+              {{/each}}
+            </script>
+
             <div class="form-group">
               <label for="inputPassword3" class="col-sm-3 control-label">文本框</label>
               <div class="col-sm-9">
-                <textarea name="f" class="form-control" rows="4"  ></textarea>
+                <textarea name="f" class="form-control" rows="4"></textarea>
               </div>
             </div>
+
             <div class="form-group">
               <div class="col-sm-offset-3 col-sm-10">
                 <button type="button" class="btn btn-primary" id="submit">保 存</button>
@@ -82,7 +131,7 @@
       })
 
       drqt.post('/', {}, function(data){
-        
+
       })
 
       setTimeout(function(){

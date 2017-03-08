@@ -50,6 +50,7 @@
 	var Rqt = __webpack_require__(5)
 	var Loc = __webpack_require__(6)
 	var ArrayHelper = __webpack_require__(7)
+	var SDialog = __webpack_require__(8)
 
 
 	window.dform = Form
@@ -59,6 +60,7 @@
 	window.dalert = Dialog.dalert
 	window.dconfirm = Dialog.dconfirm
 	window.darray = ArrayHelper
+	window.sdialog = SDialog
 
 
 /***/ },
@@ -218,7 +220,8 @@
 	 	if(btnObj)
 	 		this.setBtn(btnObj);
 
-	 	this.submit = function(callback){
+	 	this.submit = function(callback, faild){
+	    var error = faild||function(){}
 	 		if(Verify.check(this.formObj) && !this.request){
 	 			//提交预处理
 	 			this.request = true;
@@ -228,7 +231,9 @@
 	 		    //数据AJAX提交
 	 		    callback(data)
 
-	 		}
+	 		} else {
+	      error()
+	    }
 	 		return this;
 	 	}
 
@@ -252,8 +257,8 @@
 
 	  //根据ID填充表单
 	  this.autofill = function(data){
-	    for(var  key in data){
-	      $(key).val(data[key])
+	    for(var key in data){
+	      $('[name="'+key+'"]').val(data[key])
 	    }
 	  }
 	 }
@@ -613,7 +618,7 @@
 
 	      try{
 	        if(aim[i][key] == value){
-	          res = aim[i][key]
+	          res = aim[i]
 	        }
 	      }catch(e){
 	        console.log(key + '不存在')
@@ -622,6 +627,77 @@
 	    }
 	    return res
 	  }
+	}
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	ksidebar = function(){
+
+	  $('.open-sidebar-right').click(function(){
+	    var aim = $(this).data('aim')
+	    $('.sidebar-right').each(function(){
+	      $(this).css({right: -$(this).width()+'px'})
+	    })
+	    $('#'+aim).animate({right: '0px'})
+	  })
+
+	  $('.sidebar-right .close').click(function(){
+	    var sidebar = $(this).parents('.sidebar-right')
+	    sidebar.animate({right: -sidebar.width()+'px'})
+	  })
+	}
+
+	/**
+	 * @param {String} obj 选择器名
+	 */
+	function sdialog(obj, autoclose){
+	  this.obj = null
+	  _this = this
+
+	  if(typeof obj == 'string'){
+	    this.obj = $(obj)
+	  } else {
+	    this.obj = obj
+	  }
+
+	  this.obj.find('.close').click(function(){
+	    _this.close()
+	  })
+
+	  if(autoclose){
+	    $('body').click(function(){
+	      _this.close()
+	    })
+	  }
+
+	  /**
+	   * 打开对话框
+	   */
+	  this.open = function(){
+	    _this.obj.animate({right: '0px'})
+	  }
+
+	  /**
+	   * 关闭对话框
+	   */
+	  this.close = function(){
+	    _this.obj.animate({right: -_this.obj.width()+'px'})
+	  }
+
+	  /**
+	   * 重绘内容
+	   */
+	  this.draw = function(){
+
+	  }
+	}
+
+
+	module.exports = function(obj){
+	  return new sdialog(obj)
 	}
 
 

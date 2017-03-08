@@ -94,6 +94,8 @@ th {
       > th,
       > td {
         border: 1px solid @table-border-color;
+        border-right: 0px !important;
+        border-left: 0px !important;
       }
     }
   }
@@ -102,6 +104,50 @@ th {
     > td {
       border-bottom-width: 1px;
     }
+  }
+}
+
+.table-bordered-all {
+  border: 1px solid @table-border-color;
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        border: 1px solid @table-border-color;
+
+      }
+    }
+  }
+  > thead > tr {
+    > th,
+    > td {
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+.table-form{
+   th{
+    background: #f9f9f9;
+    text-align: center;
+  }
+
+  .td-input{
+    padding:0;
+  }
+
+  .td-input .form-control{
+    border: 0 ;
+  }
+
+  .form-group{
+    margin-bottom:0 !important;
+  }
+
+  .has-error{
+
   }
 }
 
