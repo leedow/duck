@@ -3162,6 +3162,21 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding-left: 0;
   list-style: none;
 }
+.nav .nav-btn {
+  float: right;
+  padding-top: 4px;
+}
+.nav .nav-btn > a {
+  background: #337ab7;
+  color: #fff;
+  border: 1px #337ab7 solid;
+  padding: 6px 15px 6px 15px;
+}
+.nav .nav-btn > a:hover {
+  background: #2e6da4;
+  border: 1px #337ab7 solid;
+  color: #fff;
+}
 .nav > li {
   position: relative;
   display: block;
@@ -4128,9 +4143,6 @@ a.badge:focus {
 }
 .list-group-item > .badge {
   float: right;
-}
-.list-group-item > .badge + .badge {
-  margin-right: 5px;
 }
 .nav-pills > li > a > .badge {
   margin-left: 3px;

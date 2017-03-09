@@ -23,7 +23,6 @@ function sdialog(obj, config){
       _this.close()
     })
   }*/
-
   this.obj.css({width:  _this.config.width+'px', right: -_this.config.width+'px'})
 
   /**
@@ -47,7 +46,6 @@ function sdialog(obj, config){
 
   }
 }
-
 
 module.exports = function(obj, config){
   return new sdialog(obj, config)

@@ -164,6 +164,7 @@ function Form(formObj, btnObj){
 
  		} else {
       error()
+      this.reset()
     }
  		return this;
  	}

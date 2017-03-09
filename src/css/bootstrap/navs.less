@@ -12,6 +12,22 @@
   list-style: none;
   &:extend(.clearfix all);
 
+  .nav-btn{
+    float:right;
+    padding-top:4px;
+    > a{
+      background: @brand-primary;
+      color:#fff;
+      border:1px @brand-primary solid;
+      padding: 6px 15px 6px 15px;
+    }
+    > a:hover{
+      background: @btn-primary-border;
+      border:1px @brand-primary solid;
+      color:#fff;
+    }
+  }
+
   > li {
     position: relative;
     display: block;

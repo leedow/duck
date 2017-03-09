@@ -233,6 +233,7 @@
 
 	 		} else {
 	      error()
+	      this.reset()
 	    }
 	 		return this;
 	 	}
@@ -659,7 +660,6 @@
 	      _this.close()
 	    })
 	  }*/
-
 	  this.obj.css({width:  _this.config.width+'px', right: -_this.config.width+'px'})
 
 	  /**
@@ -683,7 +683,6 @@
 
 	  }
 	}
-
 
 	module.exports = function(obj, config){
 	  return new sdialog(obj, config)
