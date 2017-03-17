@@ -3164,18 +3164,27 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav .nav-btn {
   float: right;
-  padding-top: 4px;
+  padding-top: 6px;
+  padding-left: 4px;
 }
 .nav .nav-btn > a {
+  border-radius: 2px;
   background: #337ab7;
   color: #fff;
   border: 1px #337ab7 solid;
-  padding: 6px 15px 6px 15px;
+  padding: 6px 12px 6px 12px;
+  font-size: 13px;
 }
 .nav .nav-btn > a:hover {
   background: #2e6da4;
   border: 1px #337ab7 solid;
   color: #fff;
+}
+.nav .nav-btn .btn {
+  border-radius: 2px;
+  color: #fff;
+  padding: 6px 12px 6px 12px !important;
+  font-size: 13px;
 }
 .nav > li {
   position: relative;
@@ -7246,4 +7255,31 @@ select {
   left: 50%;
   margin-left: -100px;
   z-index: 99999;
+}
+.color-danger {
+  color: #d9534f;
+}
+.color-primary {
+  color: #337ab7;
+}
+.color-success {
+  color: #5cb85c;
+}
+.th-checked,
+.th-unchecked {
+  cursor: pointer;
+}
+.th-checked:before {
+  padding-right: 2px;
+  content: '\e608';
+  font-family: 'iconfont';
+  color: #337ab7;
+  font-weight: normal;
+}
+.th-unchecked:before {
+  padding-right: 2px;
+  content: '\e625';
+  font-family: 'iconfont';
+  color: #999;
+  font-weight: normal;
 }

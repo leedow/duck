@@ -109,7 +109,7 @@
         <ul class="nav nav-tabs mytabs">
           <li><a href="#"><i class="icon iconfont icon-back"></i> 返回</a></li>
           <li class="active"><a href="#">对话框</a></li>
-           
+
         </ul>
         <div class=" " style="padding-top:15px;">
           <button type="button" id="open-sdialog" class="btn btn-primary">打开右侧对话框</button>
@@ -141,10 +141,12 @@
 
   <script type="text/javascript">
     var sdialog = sdialog('#sdialog', {
-      width: 600
+      width: 600,
+      autoclose: true
     })
     $('#open-sdialog').click(function(){
       sdialog.open()
+      return false
     })
     $('#close-sdialog').click(function(){
       sdialog.close()

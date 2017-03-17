@@ -17,12 +17,18 @@ function sdialog(obj, config){
     _this.close()
   })
 
-  /*
+
   if(this.config.autoclose){
     $('body').click(function(){
+
       _this.close()
     })
-  }*/
+
+    _this.obj.click(function(){
+      return false
+    })
+  }
+
   this.obj.css({width:  _this.config.width+'px', right: -_this.config.width+'px'})
 
   /**

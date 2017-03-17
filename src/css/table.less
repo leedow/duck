@@ -1,1 +1,20 @@
- 
+.th-checked, .th-unchecked{
+
+  cursor: pointer;
+}
+
+.th-checked:before{
+  padding-right:2px;
+  content: '\e608';
+  font-family: 'iconfont';
+  color: @brand-primary;
+  font-weight: normal;
+}
+
+.th-unchecked:before{
+  padding-right:2px;
+  content: '\e625';
+  font-family: 'iconfont';
+  color: #999;
+  font-weight: normal;
+}
