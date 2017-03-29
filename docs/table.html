@@ -8,10 +8,18 @@
 <meta name="keywords" content="">
 <link rel="stylesheet" href="../build/duck.css">
 <link rel="stylesheet" href="../plugins/font/iconfont.css">
+<link rel="stylesheet" href="../plugins/css/prism.css">
 <script type="text/javascript" src="../plugins/js/jquery.min.js"></script>
 <script type="text/javascript" src="../plugins/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../build/main.js"></script>
 <script type="text/javascript" src="../plugins/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../plugins/js/prism.js"></script>
+<style media="screen">
+  .pre{
+    background: #f9f9f9;
+    border:0;
+  }
+</style>
 
 </head>
 <body>
@@ -93,7 +101,7 @@
       <li class="title">
         <a href="#">DEMOS</a>
       </li>
-      <li class="active">
+      <li class="active" data-filter="/message/">
         <a href="docks/index" style="font-size:13px;">对话框&轻提示</a>
       </li>
       <li>
@@ -182,6 +190,45 @@
         </div>
 
 
+        <!--支持拖拽的表格-->
+        <div class="drag-table" id="drag-table">
+          <table class="table table-form table-hover table-bordered-all" style="width:2000px;" >
+           <thead>
+             <tr>
+               <th colspan="4">表头</th>
+             </tr>
+           </thead>
+           <tbody>
+              <tr>
+                <td>项目</td>
+                <td>内容</td>
+                <td>项目</td>
+                <td>内容</td>
+              </tr>
+              <tr>
+                <td>项目</td>
+                <td class="td-input">
+                  <div class="form-group form-group-full has-error">
+                      <input type="text" name="d" data-required=true class="form-control"  placeholder="请输入任意内容">
+
+                  </div>
+                </td>
+                <td>项目</td>
+                <td class="td-input">
+                  <div class="form-group">
+
+                      <select class="form-control" name="e">
+                        <option value="1">Item1</option>
+                      </select>
+
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+         </table>
+        </div>
+
+
 
 <button type="button" class="btn btn-primary" id="submit">保 存</button>
 
@@ -218,6 +265,8 @@
 
     })
   })
+
+  dtable.drag('#drag-table')
   </script>
 
 

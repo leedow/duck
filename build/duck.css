@@ -7283,3 +7283,14 @@ select {
   color: #999;
   font-weight: normal;
 }
+.drag-table {
+  overflow-y: auto;
+  margin-bottom: 20px;
+  position: relative;
+}
+.drag-table table {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-bottom: 0;
+}

@@ -4,35 +4,45 @@ function Toast(){
   var autoflag = true
   var _this  = this
 
-  this.open = function(content , limit){
+  this.close = function(){
+    $('#toast').animate({
+      top: '-50px'
+    }, 'fast', _this._done)
+    return this
+  }
+
+  this.open = function(content , limit, autoclose){
     if($('#toast').length==0 ){
       $('body').append('<div id="toast"></div>')
     }
     $('#toast').html(content).animate({
       top: '50px'
     }, 'fast')
-    setTimeout(function(){
-      $('#toast').animate({
-        top: '-50px'
-      }, 'fast', _this._done)
-    }, limit||2000)
+
+    if(autoclose){
+      setTimeout(function(){
+        _this.close()
+      }, limit||2000)
+    }
+
     return this
   }
 
 
   this.success = function(content, limit){
-    this.open('<div  class="alert alert-shadow alert-success"><i class="icon iconfont icon-roundcheckfill"></i> '+content+'</div>', limit)
+    this.open('<div  class="alert alert-shadow alert-success"><i class="icon iconfont icon-roundcheckfill"></i> '+content+'</div>', limit, true)
     return this
-  }
+  } //
 
 
   this.error = function(content, limit){
-    this.open('<div  class="alert alert-shadow alert-danger"><i class="icon iconfont icon-infofill"></i> '+content+'</div>', limit)
+    this.open('<div  class="alert alert-shadow alert-danger"><i class="icon iconfont icon-infofill"></i> '+content+'</div>', limit, true)
     return this
   }
 
 
   this.loading = function(content, limit){
+    //alert('fsd')
     this.open('<div  class="alert alert-shadow alert-info">'+content+'</div>', limit)
     return this
   }

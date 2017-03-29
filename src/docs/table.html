@@ -87,6 +87,45 @@
         </div>
 
 
+        <!--支持拖拽的表格-->
+        <div class="drag-table" id="drag-table">
+          <table class="table table-form table-hover table-bordered-all" style="width:2000px;" >
+           <thead>
+             <tr>
+               <th colspan="4">表头</th>
+             </tr>
+           </thead>
+           <tbody>
+              <tr>
+                <td>项目</td>
+                <td>内容</td>
+                <td>项目</td>
+                <td>内容</td>
+              </tr>
+              <tr>
+                <td>项目</td>
+                <td class="td-input">
+                  <div class="form-group form-group-full has-error">
+                      <input type="text" name="d" data-required=true class="form-control"  placeholder="请输入任意内容">
+
+                  </div>
+                </td>
+                <td>项目</td>
+                <td class="td-input">
+                  <div class="form-group">
+
+                      <select class="form-control" name="e">
+                        <option value="1">Item1</option>
+                      </select>
+
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+         </table>
+        </div>
+
+
 
 <button type="button" class="btn btn-primary" id="submit">保 存</button>
 
@@ -123,6 +162,8 @@
 
     })
   })
+
+  dtable.drag('#drag-table')
   </script>
 
 

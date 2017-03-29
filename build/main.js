@@ -51,7 +51,7 @@
 	var Loc = __webpack_require__(6)
 	var ArrayHelper = __webpack_require__(7)
 	var SDialog = __webpack_require__(8)
-
+	var Table = __webpack_require__(9)
 
 	window.dform = Form
 	window.dtoast = Toast
@@ -61,6 +61,7 @@
 	window.dconfirm = Dialog.dconfirm
 	window.darray = ArrayHelper
 	window.sdialog = SDialog
+	window.dtable = Table
 
 
 /***/ },
@@ -353,35 +354,45 @@
 	  var autoflag = true
 	  var _this  = this
 
-	  this.open = function(content , limit){
+	  this.close = function(){
+	    $('#toast').animate({
+	      top: '-50px'
+	    }, 'fast', _this._done)
+	    return this
+	  }
+
+	  this.open = function(content , limit, autoclose){
 	    if($('#toast').length==0 ){
 	      $('body').append('<div id="toast"></div>')
 	    }
 	    $('#toast').html(content).animate({
 	      top: '50px'
 	    }, 'fast')
-	    setTimeout(function(){
-	      $('#toast').animate({
-	        top: '-50px'
-	      }, 'fast', _this._done)
-	    }, limit||2000)
+
+	    if(autoclose){
+	      setTimeout(function(){
+	        _this.close()
+	      }, limit||2000)
+	    }
+
 	    return this
 	  }
 
 
 	  this.success = function(content, limit){
-	    this.open('<div  class="alert alert-shadow alert-success"><i class="icon iconfont icon-roundcheckfill"></i> '+content+'</div>', limit)
+	    this.open('<div  class="alert alert-shadow alert-success"><i class="icon iconfont icon-roundcheckfill"></i> '+content+'</div>', limit, true)
 	    return this
-	  }
+	  } //
 
 
 	  this.error = function(content, limit){
-	    this.open('<div  class="alert alert-shadow alert-danger"><i class="icon iconfont icon-infofill"></i> '+content+'</div>', limit)
+	    this.open('<div  class="alert alert-shadow alert-danger"><i class="icon iconfont icon-infofill"></i> '+content+'</div>', limit, true)
 	    return this
 	  }
 
 
 	  this.loading = function(content, limit){
+	    //alert('fsd')
 	    this.open('<div  class="alert alert-shadow alert-info">'+content+'</div>', limit)
 	    return this
 	  }
@@ -692,6 +703,29 @@
 
 	module.exports = function(obj, config){
 	  return new sdialog(obj, config)
+	}
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	
+	/**
+	 * 支持左右拖拽的表格
+	 * @param {sring} obj 目标容器
+	 */
+	module.exports.drag = function(obj){
+	  var aim = $(obj)
+	  var table = aim.find('table')
+	  var table_width = table.width()
+	  var table_height = table.outerHeight()
+
+	  aim.append('<div style="width:100%'+';height:'+table_height+'px"></div>')
+
+	  /**
+	   * 鼠标按下
+	   */
 	}
 
 
